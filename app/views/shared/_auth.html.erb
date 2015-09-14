@@ -1,0 +1,7 @@
+<% if signed_in? %>
+  <%= current_user.email %>
+  <%= button_to "Sign Out", sign_out_path, method: :delete, class: "auth-link" %>
+<% else %>
+  <%= link_to "Sign In", sign_in_path, class: "auth-link" %>
+  <%= link_to "Sign Up", sign_up_path, class: "auth-link" %>
+<% end %>
