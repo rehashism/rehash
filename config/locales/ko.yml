@@ -1,0 +1,19 @@
+ko:
+  date:
+    formats:
+      default:
+        "%Y/%m/%d"
+      with_weekday:
+        "%y/%m/%d %a"
+
+  time:
+    formats:
+      default:
+        "%a, %b %-d, %Y at %r"
+      date:
+        "%b %-d, %Y"
+      short:
+        "%B %d"
+
+  titles:
+    application: Rehash

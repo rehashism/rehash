@@ -28,3 +28,9 @@ feature "Visitor signs up" do
     expect_user_to_be_signed_out
   end
 end
+
+feature "Visitor signs up using github" do
+  scenario "by navigating to the page" do
+
+  end
+end
