@@ -4,15 +4,54 @@ class AuthHashService
   end
 
   def find_or_create_user_from_auth_hash
-    find_by_auth_hash ||
-      find_by_instagram ||
-      find_by_email ||
-      create_user
+    find_user || create_user
   end
 
   private
 
   attr_accessor :auth_hash
+
+  def find_user
+    identity.user
+  end
+
+  def create_user
+    binding.pry
+    @user = User.create(external_auth_count: 1)
+    binding.pry
+    @user.identities << create_identity
+    binding.pry
+  end
+
+  def find_identity_by_auth_hash
+    Identity.find_by(provider: auth_hash['provider'], uid: auth_hash['uid'])
+  end
+
+  def create_identity
+    Identity.create(
+      provider: auth_hash['provider'],
+      uid: auth_hash['uid'],
+      name: name,
+      nickname: auth_hash['info']['nickname']
+    )
+  end
+
+  def find_or_create_identity
+    find_identity_by_auth_hash || create_identity
+  end
+
+  def identity
+    find_or_create_identity
+  end
+
+  def name
+    auth_hash['info']['name'] || auth_hash['info']['nickname']
+  end
+
+=begin
+adding sns id using update without oauth could be dangerous.
+need to add omniauth everytime you switch sns id
+also email and password need more login to add and remove
 
   def find_by_instagram
     user = User.find_by(instagram_username: auth_hash["info"]["nickname"])
@@ -26,9 +65,6 @@ class AuthHashService
     user
   end
 
-  def find_by_auth_hash
-    User.find_by(auth_provider: auth_hash['provider'], auth_uid: auth_hash['uid'])
-  end
 
   def update_provider_info(user)
     if user
@@ -38,19 +74,5 @@ class AuthHashService
       )
     end
   end
-
-  def create_user
-    User.create(
-      auth_provider: auth_hash['provider'],
-      auth_uid: auth_hash['uid'],
-      name: name,
-      email: auth_hash['info']['email'],
-      instagram_username: auth_hash['info']['nickname']
-    )
-  end
-
-  def name
-    auth_hash['info']['name'] || auth_hash['info']['nickname']
-  end
-
+=end
 end
