@@ -22,6 +22,7 @@ gem "pg"
 gem "rack-canonical-host"
 gem "puma"
 gem "rails", "~> 4.2.0"
+gem "rails-i18n"
 gem "recipient_interceptor"
 gem "refills"
 gem "sass-rails", "~> 5.0"
@@ -42,6 +43,7 @@ group :development, :test do
   gem "dotenv-rails"
   gem "factory_girl_rails"
   gem "pry-rails"
+  gem "pry-nav"
   gem "rspec-rails", "~> 3.3.0"
 end
 

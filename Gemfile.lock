@@ -172,6 +172,8 @@ GEM
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
       slop (~> 3.4)
+    pry-nav (0.2.4)
+      pry (>= 0.9.10, < 0.11.0)
     pry-rails (0.3.4)
       pry (>= 0.9.10)
     puma (2.13.4)
@@ -201,6 +203,9 @@ GEM
       rails-deprecated_sanitizer (>= 1.0.1)
     rails-html-sanitizer (1.0.2)
       loofah (~> 2.0)
+    rails-i18n (4.0.4)
+      i18n (~> 0.6)
+      railties (~> 4.0)
     rails_stdout_logging (0.0.4)
     railties (4.2.4)
       actionpack (= 4.2.4)
@@ -314,11 +319,13 @@ DEPENDENCIES
   omniauth
   omniauth-instagram
   pg
+  pry-nav
   pry-rails
   puma
   rack-canonical-host
   rack-timeout
   rails (~> 4.2.0)
+  rails-i18n
   rails_stdout_logging
   recipient_interceptor
   refills
