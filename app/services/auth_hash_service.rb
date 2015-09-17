@@ -3,6 +3,8 @@ class AuthHashService
     @auth_hash = auth_hash
   end
 
+  attr_reader :identity
+
   def find_or_create_user_from_auth_hash
     find_user || create_user
   end
@@ -12,15 +14,13 @@ class AuthHashService
   attr_accessor :auth_hash
 
   def find_user
-    identity.user
+    find_or_create_identity.user
   end
 
   def create_user
-    binding.pry
     @user = User.create(external_auth_count: 1)
-    binding.pry
-    @user.identities << create_identity
-    binding.pry
+    @user.identities << identity
+    @user
   end
 
   def find_identity_by_auth_hash
@@ -28,7 +28,7 @@ class AuthHashService
   end
 
   def create_identity
-    Identity.create(
+    @identity = Identity.create(
       provider: auth_hash['provider'],
       uid: auth_hash['uid'],
       name: name,
@@ -38,10 +38,6 @@ class AuthHashService
 
   def find_or_create_identity
     find_identity_by_auth_hash || create_identity
-  end
-
-  def identity
-    find_or_create_identity
   end
 
   def name
