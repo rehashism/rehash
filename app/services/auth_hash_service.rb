@@ -3,8 +3,6 @@ class AuthHashService
     @auth_hash = auth_hash
   end
 
-  attr_reader :identity
-
   def find_or_create_user_from_auth_hash
     find_user || create_user
   end
@@ -12,6 +10,7 @@ class AuthHashService
   private
 
   attr_accessor :auth_hash
+  attr_reader :identity
 
   def find_user
     find_or_create_identity.user

@@ -2,12 +2,16 @@ class AuthCallbacksController < ApplicationController
   def create
     @user = AuthHashService.new(auth_hash).find_or_create_user_from_auth_hash
     sign_in @user
-    session[:token] = auth_hash[:credentials][:token]
+    save_token
     redirect_to url_after_auth
     clear_return_to
   end
 
   private
+
+  def save_token
+    session[:token] = auth_hash[:credentials][:token]
+  end
 
   def url_after_auth
     if originated_from_sign_in_or_sign_up?
