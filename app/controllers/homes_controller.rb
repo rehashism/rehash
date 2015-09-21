@@ -11,7 +11,7 @@ class HomesController < ApplicationController
     html_file = File.basename(erb_file, '.erb') #=>"page.html"
     erb_str = File.read(erb_file)
 
-    @name = "Nyuno"
+    @name = current_user.identities[0].nickname
     renderer = ERB.new(erb_str)
     result = renderer.result()
 
