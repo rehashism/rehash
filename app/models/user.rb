@@ -2,6 +2,7 @@ class User < ActiveRecord::Base
   include Clearance::User
 
   has_many :identities
+  has_one :store
 
   def external_auth?
     external_auth_count > 0
