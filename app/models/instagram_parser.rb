@@ -4,7 +4,7 @@ class InstagramParser
   def initialize(access_token, current_user)
     @client = Instagram.client(access_token: access_token)
     @user_info = @client.user
-    @media_info = @client.recent_media
+    @media_info = @client.user_recent_media
     @current_user = current_user
   end
 
@@ -13,7 +13,7 @@ class InstagramParser
   end
 
   def delete_menus
-    store.menus.destroy_all
+    store.menus.delete_all
   end
 
   def parse_media

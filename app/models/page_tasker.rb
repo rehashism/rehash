@@ -5,7 +5,6 @@ class PageTasker
   end
 
   def first_generate_rehash
-    @generator.make_directory
     generate_rehash
   end
 
@@ -14,10 +13,21 @@ class PageTasker
     generate_rehash
   end
 
+  def generate_or_refresh_rehash(type)
+    if type.eql? "first"
+      first_generate_rehash
+    elsif type.eql? "refresh"
+      refresh_rehash
+    else
+      raise "type error"
+    end
+  end
+
   private
   attr_reader :generator, :parser
 
   def generate_rehash
+    @generator.make_directory
     @parser.create_menus
     @generator.generate_files
     generate_s3(@generator.page_name)

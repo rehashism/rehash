@@ -4,7 +4,7 @@ class AuthHashService
   end
 
   def find_or_create_user_from_auth_hash
-    find_user || create_user
+    find_user || create_user_and_store
   end
 
   private
@@ -16,9 +16,12 @@ class AuthHashService
     find_or_create_identity.user
   end
 
-  def create_user
+  def create_user_and_store
     @user = User.create(external_auth_count: 1)
     @user.identities << identity
+    @name = identity.nickname.gsub(/_/, '-')
+    @name << "1" if Store.find_by(name: @name)
+    @user.create_store(name: @name, description: "#{@name}'s Home #{I18n.t('.model.store.description')} " )
     @user
   end
 

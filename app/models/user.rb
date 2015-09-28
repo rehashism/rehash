@@ -2,7 +2,7 @@ class User < ActiveRecord::Base
   include Clearance::User
 
   has_many :identities
-  has_one :store
+  has_one :store, dependent: :delete
 
   def external_auth?
     external_auth_count > 0
