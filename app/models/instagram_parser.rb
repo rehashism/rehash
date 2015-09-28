@@ -17,12 +17,9 @@ class InstagramParser
   end
 
   def parse_media
-
-  end
-
-  def refresh_menus
-    delete_menus
-    create_menus
+    @media_info.reduce([]) do |media, medium|
+      media << parse_images(medium).merge(parse_caption(medium))
+    end
   end
 
 
@@ -34,5 +31,23 @@ class InstagramParser
 
   def store
     @current_user.store
+  end
+
+  def parse_caption(medium)
+    caption = {}
+    if medium.caption
+      caption[:caption_text] = medium.caption.text
+      caption.merge!(parse_tag(caption[:caption_text]))
+    end
+    caption
+  end
+
+  def parse_tag(caption)
+    { price: caption.scan(/\$\d+\.*\d*/)[0].to_s.gsub!(/\$/, ''), category: caption.scan(/##\S*/)[0].to_s.encode('utf-8', 'utf-8').scan(/[[:alnum:]]+/)[0], name: caption.scan(/\!#\S*/)[0].to_s.encode('utf-8', 'utf-8').scan(/[[:alnum:]]+/)[0] }
+  end
+
+  def parse_images(medium)
+    data = medium.to_hash.slice("images")["images"].deep_symbolize_keys
+    data.transform_values { |x| x[:url] }
   end
 end
