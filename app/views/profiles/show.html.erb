@@ -1,0 +1,9 @@
+<% if signed_in? %>
+  <% if current_user.store.menus.nil? %>
+    <%= link_to "Generate Page", homes_path(type: "first"), method: :post %>
+  <% else %>
+    <%= link_to "Rehash Page", homes_path(type: "refresh"), method: :post %>
+  <% end %>
+<% else %>
+  <%= button_to "Sign up", sign_up_path, method: :get %>
+<% end %>
