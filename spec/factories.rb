@@ -1,4 +1,14 @@
-FactoryGirl.define do  factory :identity do
+FactoryGirl.define do  factory :menu do
+    name "MyString"
+price "MyString"
+image_url "MyString"
+description "MyText"
+  end
+  factory :store do
+    name "MyString"
+description "MyText"
+  end
+  factory :identity do
     
   end
 

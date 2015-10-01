@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150917010101) do
+ActiveRecord::Schema.define(version: 20150928072726) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,6 +44,32 @@ ActiveRecord::Schema.define(version: 20150917010101) do
 
   add_index "identities", ["user_id"], name: "index_identities_on_user_id", using: :btree
 
+  create_table "menus", force: :cascade do |t|
+    t.string   "name"
+    t.string   "price"
+    t.text     "description"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+    t.integer  "store_id"
+    t.string   "category"
+    t.string   "caption_text"
+    t.string   "low_resolution"
+    t.string   "standard_resolution"
+    t.string   "thumbnail"
+  end
+
+  add_index "menus", ["store_id"], name: "index_menus_on_store_id", using: :btree
+
+  create_table "stores", force: :cascade do |t|
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "user_id"
+  end
+
+  add_index "stores", ["user_id"], name: "index_stores_on_user_id", using: :btree
+
   create_table "users", force: :cascade do |t|
     t.datetime "created_at",                      null: false
     t.datetime "updated_at",                      null: false
@@ -58,4 +84,6 @@ ActiveRecord::Schema.define(version: 20150917010101) do
   add_index "users", ["remember_token"], name: "index_users_on_remember_token", using: :btree
 
   add_foreign_key "identities", "users"
+  add_foreign_key "menus", "stores"
+  add_foreign_key "stores", "users"
 end

@@ -1,8 +1,10 @@
 <html>
 <head>
-  <title>Test</title>
+<title><%= @page_name  %>'s Home</title>
 </head>
 <body>
-  <%= @name %>'s Home
+<% @current_user.store.menus.each do |menu| %>
+  <img src="<%= menu.standard_resolution  %>">
+<% end %>
 </body>
 </html>

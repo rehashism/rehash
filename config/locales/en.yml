@@ -1,4 +1,7 @@
 en:
+  model:
+    store:
+      description: "Welcome"
   date:
     formats:
       default:
