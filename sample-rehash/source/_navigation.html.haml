@@ -1,0 +1,39 @@
+%header.centered-navigation{:role => "banner"}
+  .centered-navigation-wrapper
+    %a.mobile-logo{:href => "javascript:void(0)"}
+      %img{:alt => "Logo image", :src => "https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/placeholder_logo_3_dark.png"}/
+    %a#js-centered-navigation-mobile-menu.centered-navigation-mobile-menu{:href => "javascript:void(0)"} MENU
+    %nav{:role => "navigation"}
+      %ul#js-centered-navigation-menu.centered-navigation-menu.show
+        %li.nav-link
+          %a{:href => "javascript:void(0)"} Menu
+        %li.nav-link
+          %a{:href => "javascript:void(0)"} Drinks
+        %li.nav-link
+          %a{:href => "javascript:void(0)"} Map
+        %li.nav-link.logo
+          %a.logo{:href => "javascript:void(0)"}
+            %img{:alt => "Logo image", :src => "https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/placeholder_logo_3_dark.png"}/
+        %li.nav-link
+          %a{:href => "javascript:void(0)"} Members
+        %li.nav-link.more
+          %a{:href => "javascript:void(0)"} More
+          %ul.submenu
+            %li
+              %a{:href => "javascript:void(0)"} Special Menu
+            %li
+              %a{:href => "javascript:void(0)"} Special Drink
+            %li.more
+              %a{:href => "javascript:void(0)"} Today's special
+              %ul.submenu
+                %li
+                  %a{:href => "javascript:void(0)"} Special 1
+                %li
+                  %a{:href => "javascript:void(0)"} Special 2
+            %li.more
+              %a{:href => "javascript:void(0)"} Another submenu
+              %ul.submenu
+                %li
+                  %a{:href => "javascript:void(0)"} Sub-submenu
+                %li
+                  %a{:href => "javascript:void(0)"} An Item
