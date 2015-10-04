@@ -28,7 +28,7 @@ class PageGenerator
     erb_file = File.join(Rails.root + "app/templates/#{file_name}.erb")
     basic_file = File.basename(erb_file, '.erb')
     erb_str = File.read(erb_file)
-    
+
     renderer = ERB.new(erb_str)
     result = renderer.result(binding)
 
