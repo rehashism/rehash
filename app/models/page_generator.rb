@@ -8,7 +8,7 @@ class PageGenerator
 
   def make_directory
     system "mkdir #{@page_name}"
-    system "mkdir sample-rehash/source/data"
+    system "mkdir sample-rehash/data"
   end
 
   def generate_files
@@ -19,9 +19,12 @@ class PageGenerator
   private
 
   def generate_data_json
-    file_name = File.join(Rails.root + "sample-rehash/source/data/menus.json")
-    File.open(file_name, 'w') { |f| f.write(@current_user.store.menus.to_json) }
-    binding.pry
+    file_name = File.join(Rails.root + "sample-rehash/data/menus.json")
+    File.open(file_name, 'w') { |f| f.write(menus_to_json) }
+  end
+
+  def menus_to_json
+    @current_user.store.menus.to_json(only: [:name, :price, :category, :standard_resolution])
   end
 
   def generate_route_json
