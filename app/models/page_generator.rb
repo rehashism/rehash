@@ -8,22 +8,26 @@ class PageGenerator
 
   def make_directory
     system "mkdir #{@page_name}"
-  end
-
-  def generate_page
-    write_file('layout.html')
-  end
-
-  def generate_json
-    write_file('route53.json')
+    system "mkdir sample-rehash/source/data"
   end
 
   def generate_files
-    generate_page
-    generate_json
+    generate_data_json
+    generate_route_json
   end
 
   private
+
+  def generate_data_json
+    file_name = File.join(Rails.root + "sample-rehash/source/data/menus.json")
+    File.open(file_name, 'w') { |f| f.write(@current_user.store.menus.to_json) }
+    binding.pry
+  end
+
+  def generate_route_json
+    write_file('route53.json')
+  end
+
   def write_file(file_name)
     erb_file = File.join(Rails.root + "app/templates/#{file_name}.erb")
     basic_file = File.basename(erb_file, '.erb')
