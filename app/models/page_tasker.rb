@@ -36,12 +36,14 @@ class PageTasker
   def generate_s3(page_name)
     system "aws s3 mb s3://#{page_name}.rehashism.com"
     system "aws s3 rm s3://#{page_name}.rehashism.com --recursive"
-    system %Q[aws s3 sync #{page_name} s3://#{page_name}.rehashism.com --acl public-read --cache-control "public, max-age=86400"]
-    system "aws s3 website s3://#{page_name}.rehashism.com --index-document layout.html"
+    system %Q[aws s3 sync sample-rehash/build s3://#{page_name}.rehashism.com --acl public-read --cache-control "public, max-age=86400"]
+    system "aws s3 website s3://#{page_name}.rehashism.com --index-document index.html"
 
     system %Q[aws route53 change-resource-record-sets --hosted-zone-id ZXXTN8ME7HY7P --change-batch file://#{page_name}/route53.json]
 
     system "rm -rf #{page_name}"
+    system "rm -rf sample-rehash/build"
+    system "rm -rf sample-rehash/source/data"
 
   end
 end
