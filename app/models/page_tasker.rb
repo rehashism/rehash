@@ -35,7 +35,7 @@ class PageTasker
 
   def generate_s3(page_name)
     Dir.chdir "sample-rehash"
-    system "middleman build"
+    system "bundle exec middleman build --verbose"
     Dir.chdir ".."
 
     system "aws s3 mb s3://#{page_name}.rehashism.com"
