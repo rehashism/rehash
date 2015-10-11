@@ -44,6 +44,6 @@ class PageTasker
     system %Q[aws route53 change-resource-record-sets --hosted-zone-id ZXXTN8ME7HY7P --change-batch file://#{page_name}/route53.json]
 
     system "rm -rf #{page_name}"
-
+    system "rm -r builder/_data/*"
   end
 end
