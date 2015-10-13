@@ -13,3 +13,4 @@
 /tags
 /tmp/*
 .sass-cache
+.sass-cache/*
