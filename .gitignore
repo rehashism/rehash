@@ -13,3 +13,4 @@
 /tags
 /tmp/*
 .sass-cache/*
+builder/.sass-cache/*
