@@ -63,3 +63,10 @@ group :staging, :production do
   gem "rails_stdout_logging"
   gem "rack-timeout"
 end
+
+group :middleman do
+  gem "middleman"
+  gem "middleman-livereload"
+  gem "middleman-deploy"
+  gem "jquery-middleman"
+end

@@ -34,9 +34,12 @@ class PageTasker
   end
 
   def generate_s3(page_name)
+    temp_env = ENV["BUNDLE_GEMFILE"]
+    ENV["BUNDLE_GEMFILE"] = "/home/oiojin831/workspaces/rails/rehash/sample-rehash/Gemfile"
     Dir.chdir "sample-rehash"
     system "bundle exec middleman build --verbose"
     Dir.chdir ".."
+    ENV["BUNDLE_GEMFILE"] = temp_env
 
     system "aws s3 mb s3://#{page_name}.rehashism.com"
     system "aws s3 rm s3://#{page_name}.rehashism.com --recursive"
