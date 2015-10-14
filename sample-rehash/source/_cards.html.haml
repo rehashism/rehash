@@ -1,9 +1,7 @@
 .card
   .card-image
     %img{:alt => "", :src => "#{item.standard_resolution}"}
-  .card-header
-    Double Trouble
-  .card-header
-    $
-  .card-copy
-    %p Delicious sandwich with lots of cheese
+  .card-header.text-center
+    #{item.name}
+    %br
+    #{item.price},000원

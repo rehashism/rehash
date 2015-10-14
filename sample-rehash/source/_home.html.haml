@@ -1,5 +1,4 @@
 - data.menus.each do |item|
   - if item.category == "menu"
-    = partial "title_bar", locals: {item: item}
     .cards
       = partial "cards", locals: {item: item}
