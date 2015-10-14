@@ -7,7 +7,7 @@ class PageGenerator
   end
 
   def make_directory
-    system "mkdir #{@page_name}"
+    system "mkdir sample-rehash/data"
   end
 
   def generate_files
@@ -18,7 +18,7 @@ class PageGenerator
   private
 
   def generate_data_json
-    file_name = File.join(Rails.root + "builder/_data/menus.json")
+    file_name = File.join(Rails.root + "sample-rehash/data/menus.json")
     File.open(file_name, 'w') { |f| f.write(menus_to_json) }
   end
 
@@ -34,7 +34,7 @@ class PageGenerator
     erb_file = File.join(Rails.root + "app/templates/#{file_name}.erb")
     basic_file = File.basename(erb_file, '.erb')
     erb_str = File.read(erb_file)
-    
+
     renderer = ERB.new(erb_str)
     result = renderer.result(binding)
 
