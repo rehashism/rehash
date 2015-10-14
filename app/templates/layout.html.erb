@@ -4,10 +4,7 @@
 </head>
 <body>
 <% @current_user.store.menus.each do |menu| %>
-  <% unless menu.category.nil? %>
-    <img src="<%= menu.standard_resolution  %>">
-    <h1> <%= menu.name %> </h1>
-  <% end %>
+  <img src="<%= menu.standard_resolution  %>">
 <% end %>
 </body>
 </html>
