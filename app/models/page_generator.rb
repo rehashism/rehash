@@ -7,6 +7,7 @@ class PageGenerator
   end
 
   def make_directory
+    system "mkdir #{@page_name}"
     system "mkdir sample-rehash/data"
   end
 
